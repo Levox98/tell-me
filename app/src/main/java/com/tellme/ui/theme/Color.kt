@@ -1,4 +1,4 @@
-package com.levox.tellme.ui.theme
+package com.tellme.ui.theme
 
 import androidx.compose.ui.graphics.Color
 

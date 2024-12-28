@@ -1,6 +1,5 @@
-package com.levox.tellme.ui.theme
+package com.tellme.ui.theme
 
-import android.app.Activity
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
