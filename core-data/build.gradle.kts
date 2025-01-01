@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-	namespace = "com.tellme.data"
+	namespace = "com.tellme.core_data"
 	compileSdk = 34
 
 	defaultConfig {
