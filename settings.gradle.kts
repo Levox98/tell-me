@@ -23,3 +23,4 @@ rootProject.name = "TellMe"
 include(":app")
 include(":core-data")
 include(":core-domain")
+include(":feature-main")
