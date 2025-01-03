@@ -1,6 +1,8 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.hilt.android)
+    alias(libs.plugins.kotlin.ksp)
 }
 
 android {
@@ -33,6 +35,11 @@ android {
 }
 
 dependencies {
+
+    implementation(project(":core-domain"))
+
+    ksp(libs.hilt.compiler)
+    implementation(libs.hilt.android)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
