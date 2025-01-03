@@ -43,6 +43,8 @@ android {
 
 dependencies {
 
+	implementation(project(":core-ui"))
+
 	ksp(libs.hilt.compiler)
 	implementation(libs.hilt.android)
 
