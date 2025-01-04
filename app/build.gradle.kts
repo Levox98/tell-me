@@ -44,12 +44,15 @@ android {
 
 dependencies {
 
+	implementation(project(":core-data"))
+	implementation(project(":core-domain"))
 	implementation(project(":core-ui"))
 	implementation(project(":feature-main"))
 	implementation(project(":feature-note"))
 
 	ksp(libs.hilt.compiler)
 	implementation(libs.hilt.android)
+	implementation(libs.hilt.navigation.compose)
 
 	implementation(libs.navigation.compose)
 	implementation(libs.kotlinx.serialization.json)
