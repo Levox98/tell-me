@@ -2,10 +2,11 @@ package com.tellme.core_data.mapper
 
 import com.tellme.core_data.entity.NoteDataEntity
 import com.tellme.core_domain.entity.Note
+import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class NoteMapper {
+class NoteMapper @Inject constructor() {
 
     fun mapToDb(note: Note) =
         NoteDataEntity(
