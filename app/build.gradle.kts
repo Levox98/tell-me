@@ -44,9 +44,13 @@ android {
 dependencies {
 
 	implementation(project(":core-ui"))
+	implementation(project(":feature-main"))
+	implementation(project(":feature-note"))
 
 	ksp(libs.hilt.compiler)
 	implementation(libs.hilt.android)
+
+	implementation(libs.navigation.compose)
 
 	implementation(libs.androidx.core.ktx)
 	implementation(libs.androidx.lifecycle.runtime.ktx)

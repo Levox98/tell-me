@@ -7,7 +7,7 @@ plugins {
 
 android {
 	namespace = "com.tellme.core_data"
-	compileSdk = 34
+	compileSdk = 35
 
 	defaultConfig {
 		minSdk = 24

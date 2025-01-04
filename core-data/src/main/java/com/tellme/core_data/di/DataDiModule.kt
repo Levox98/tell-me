@@ -6,7 +6,6 @@ import com.tellme.core_data.db.AppDatabase
 import com.tellme.core_data.db.NoteDao
 import com.tellme.core_data.repository.NoteRepositoryImpl
 import com.tellme.core_domain.repository.NoteRepository
-import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -16,7 +15,7 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-abstract class DataDiModule {
+object DataDiModule {
 
     @Singleton
     @Provides
@@ -30,12 +29,12 @@ abstract class DataDiModule {
     /* DAOs */
 
     @Singleton
-    @Binds
-    abstract fun bindNoteDao(): NoteDao
+    @Provides
+    fun provideNoteDao(db: AppDatabase): NoteDao = db.notesDao()
 
     /* Repositories */
 
     @Singleton
-    @Binds
-    abstract fun bindNoteRepository(impl: NoteRepositoryImpl): NoteRepository
+    @Provides
+    fun provideNoteRepository(impl: NoteRepositoryImpl): NoteRepository = impl
 }
