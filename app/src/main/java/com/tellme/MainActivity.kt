@@ -4,29 +4,12 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.offset
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Add
-import androidx.compose.material.icons.filled.Home
-import androidx.compose.material.icons.filled.Settings
-import androidx.compose.material3.FabPosition
-import androidx.compose.material3.FloatingActionButton
-import androidx.compose.material3.FloatingActionButtonDefaults
-import androidx.compose.material3.Icon
-import androidx.compose.material3.NavigationBar
-import androidx.compose.material3.NavigationBarItem
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.tellme.core_ui.theme.TellMeTheme
+import com.tellme.feature_note.screen.NewNoteScreen
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -39,61 +22,21 @@ class MainActivity : ComponentActivity() {
             val navController = rememberNavController()
 
             TellMeTheme {
-                Scaffold(
-                    modifier = Modifier.fillMaxSize(),
-                    bottomBar = {
-                        NavigationBar {
-
-                            NavigationBarItem(
-                                selected = false,
-                                onClick = {},
-                                icon = {
-                                    Icon(imageVector = Icons.Default.Home, contentDescription = null)
-                                }
-                            )
-
-                            NavigationBarItem(
-                                selected = false,
-                                onClick = {},
-                                icon = {
-                                    Icon(imageVector = Icons.Default.Settings, contentDescription = null)
-                                }
-                            )
+                NavHost(
+                    navController = navController,
+                    startDestination = NavDestination.MainRoot
+                ) {
+                    composable<NavDestination.MainRoot> {
+                        MainRootScreen {
+                            navController.navigate(NavDestination.NewNoteScreen)
                         }
-                    },
-                    floatingActionButton = {
-                        Box() {
-                            FloatingActionButton(
-                                onClick = {
-                                    navController.navigate(NavDestination.NewNoteScreen)
-                                },
-                                modifier = Modifier.offset(y = 42.dp),
-                                shape = CircleShape,
-                                elevation = FloatingActionButtonDefaults.elevation(0.dp)
-                            ) { Icon(imageVector = Icons.Default.Add, null) }
-                        }
-                    },
-                    floatingActionButtonPosition = FabPosition.Center
-                ) { innerPadding ->
-                    TellMeRootContainer(navController, modifier = Modifier.padding(innerPadding))
+                    }
+
+                    composable<NavDestination.NewNoteScreen> {
+                        NewNoteScreen(vm = hiltViewModel())
+                    }
                 }
             }
         }
-    }
-}
-
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true, showSystemUi = true)
-@Composable
-fun GreetingPreview() {
-    TellMeTheme {
-        Greeting("Android")
     }
 }

@@ -7,6 +7,9 @@ sealed class NavDestination {
     data object Onboarding : NavDestination()
 
     @Serializable
+    data object MainRoot : NavDestination()
+
+    @Serializable
     data object MainScreen : NavDestination()
 
     @Serializable
