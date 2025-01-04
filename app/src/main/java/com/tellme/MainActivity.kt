@@ -64,7 +64,9 @@ class MainActivity : ComponentActivity() {
                     floatingActionButton = {
                         Box() {
                             FloatingActionButton(
-                                onClick = {},
+                                onClick = {
+                                    navController.navigate(NavDestination.NewNoteScreen)
+                                },
                                 modifier = Modifier.offset(y = 42.dp),
                                 shape = CircleShape,
                                 elevation = FloatingActionButtonDefaults.elevation(0.dp)
