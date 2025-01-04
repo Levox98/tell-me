@@ -6,13 +6,13 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ViewModelComponent
-import javax.inject.Singleton
 
 @Module
 @InstallIn(ViewModelComponent::class)
-abstract class MainDiModule {
+object MainDiModule {
 
-    @Singleton
     @Provides
-    abstract fun provideGetNotesByMonthUseCase(repository: NoteRepository): GetNotesByMonthUseCase
+    fun provideGetNotesByMonthUseCase(repository: NoteRepository): GetNotesByMonthUseCase {
+        return GetNotesByMonthUseCase(repository)
+    }
 }
