@@ -11,5 +11,5 @@ interface NoteRepository {
     fun deleteNote(noteId: Int) // ?
 
     suspend fun getNote(noteId: Int): Either<Note>
-    fun getNotesPage(page: Int): Flow<List<Note>>
+    fun getNotesByMonth(month: Int): Flow<List<Note>>
 }

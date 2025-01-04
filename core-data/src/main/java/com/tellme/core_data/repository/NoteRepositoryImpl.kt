@@ -36,6 +36,7 @@ class NoteRepositoryImpl @Inject constructor(
         return Either.Success(note)
     }
 
-    override fun getNotesPage(page: Int): Flow<List<Note>> =
+    override fun getNotesByMonth(month: Int): Flow<List<Note>> =
+        // TODO: create logic for getting the notes for a given month
         noteDao.getNotes().map { noteMapper.mapToDomain(it) }
 }
