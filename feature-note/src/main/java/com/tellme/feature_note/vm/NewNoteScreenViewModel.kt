@@ -12,6 +12,11 @@ sealed interface NewNoteScreenIntent {
 
 }
 
+sealed interface NewNoteScreenAction {
+    data class SetTitle(val title: String) : NewNoteScreenAction
+    data class SetText(val text: String) : NewNoteScreenAction
+}
+
 @HiltViewModel
 class NewNoteScreenViewModel @Inject constructor(
 

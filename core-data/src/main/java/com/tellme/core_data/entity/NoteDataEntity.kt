@@ -14,7 +14,7 @@ data class NoteDataEntity(
     val id: Int = 0,
 
     @ColumnInfo(name = "date")
-    val date: Date,
+    val date: Date, // TODO: change to separate fields for day, month, year and time
 
     @ColumnInfo(name = "title")
     val title: String,
