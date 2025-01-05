@@ -2,17 +2,27 @@ package com.tellme.feature_note.screen
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.Button
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.OutlinedTextField
-import androidx.compose.material3.Surface
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.State
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.tooling.preview.Preview
@@ -26,18 +36,37 @@ import com.tellme.feature_note.vm.NewNoteScreenViewState
 fun NewNoteScreen(
     vm: NewNoteScreenViewModel
 ) {
-    // TODO: NewNoteScreenRoot
+    NewNoteScreenRoot(vmState = vm.state.collectAsState(), submitAction = vm::submitAction)
 }
 
 @Composable
 fun NewNoteScreenRoot(
-    vmState: NewNoteScreenViewState,
+    vmState: State<NewNoteScreenViewState>,
     submitAction: (NewNoteScreenAction) -> Unit
 ) {
-    Surface(
-        modifier = Modifier,
-    ) {
-        Box(modifier = Modifier.padding(horizontal = 16.dp)) {
+    Scaffold(
+        modifier = Modifier
+            .fillMaxSize(),
+        topBar = {
+            Row(
+                modifier = Modifier
+                    .statusBarsPadding()
+                    .padding(top = 16.dp)
+            ) {
+                IconButton(onClick = {}) {
+                    Icon(
+                        imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+                        contentDescription = null
+                    )
+                }
+            }
+        }
+    ) { innerPadding ->
+        Box(
+            modifier = Modifier
+                .padding(horizontal = 16.dp)
+                .padding(innerPadding)
+        ) {
 
             Column(
                 modifier = Modifier
@@ -92,10 +121,14 @@ fun NewNoteScreenRoot(
 
 }
 
-@Preview(showBackground = true, showSystemUi = true)
+@Preview(showBackground = true, showSystemUi = false)
 @Composable
 fun NewNoteScreenPreview() {
     TellMeTheme {
-        NewNoteScreenRoot(NewNoteScreenViewState.Default) {}
+        val state = remember {
+            mutableStateOf(NewNoteScreenViewState.Default)
+        }
+
+        NewNoteScreenRoot(state) {}
     }
 }

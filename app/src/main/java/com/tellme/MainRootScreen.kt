@@ -25,7 +25,6 @@ import androidx.navigation.compose.rememberNavController
 fun MainRootScreen(
     onNavigateToNewNote: () -> Unit
 ) {
-
     val navController = rememberNavController()
 
     Scaffold(

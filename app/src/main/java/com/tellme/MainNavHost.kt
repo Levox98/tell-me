@@ -11,7 +11,11 @@ import com.tellme.feature_main.screen.MainScreen
 @Composable
 fun MainNavHost(navController: NavHostController, modifier: Modifier) {
 
-    NavHost(navController = navController, startDestination = NavDestination.MainScreen, modifier = modifier) {
+    NavHost(
+        navController = navController,
+        startDestination = NavDestination.MainScreen,
+        modifier = modifier
+    ) {
         composable<NavDestination.MainScreen> {
             MainScreen(vm = hiltViewModel(), onNavigateToDayNotes = {})
         }

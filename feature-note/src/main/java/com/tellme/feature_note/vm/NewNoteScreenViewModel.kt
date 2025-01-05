@@ -22,5 +22,7 @@ class NewNoteScreenViewModel @Inject constructor(
 
 ) : BaseViewModel<NewNoteScreenViewState.Default, NewNoteScreenIntent>(NewNoteScreenViewState.Default) {
 
+    fun submitAction(newAction: NewNoteScreenAction) {
 
+    }
 }
