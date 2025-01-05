@@ -24,11 +24,6 @@ sealed interface MainScreenIntent {
     data class OpenDayNotesIntent(val day: Int) : MainScreenIntent
 }
 
-sealed interface MainScreenAction {
-    data object CreateNewNote : MainScreenAction
-    data class OpenDayNotes(val day: Int) : MainScreenIntent
-}
-
 @HiltViewModel
 class MainScreenViewModel @Inject constructor(
     private val getNotesByMonthUseCase: GetNotesByMonthUseCase
