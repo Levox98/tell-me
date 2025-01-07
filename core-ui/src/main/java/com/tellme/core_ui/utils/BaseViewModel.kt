@@ -20,4 +20,8 @@ open class BaseViewModel<T, I>(
     fun setIntent(newIntent: I) {
         _currentIntent.value = newIntent
     }
+
+    fun updateState(newState: T) {
+        _state.value = newState
+    }
 }
