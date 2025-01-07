@@ -16,7 +16,7 @@ class NoteRepositoryImpl @Inject constructor(
     private val noteMapper: NoteMapper
 ) : NoteRepository {
 
-    override fun createNote(note: Note) {
+    override fun saveNoteToLocal(note: Note) {
         val noteEntity = noteMapper.mapToDb(note)
         noteDao.addNote(noteEntity)
     }

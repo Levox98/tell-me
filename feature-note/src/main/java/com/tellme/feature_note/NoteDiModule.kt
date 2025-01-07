@@ -1,7 +1,7 @@
 package com.tellme.feature_note
 
 import com.tellme.core_domain.repository.NoteRepository
-import com.tellme.core_domain.usecase.CreateNoteUseCase
+import com.tellme.core_domain.usecase.SaveNoteUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -14,7 +14,7 @@ object NoteDiModule {
 
     @Singleton
     @Provides
-    fun bindCreateNoteUseCase(repository: NoteRepository): CreateNoteUseCase {
-        return CreateNoteUseCase(repository)
+    fun bindSaveNoteUseCase(repository: NoteRepository): SaveNoteUseCase {
+        return SaveNoteUseCase(repository)
     }
 }
