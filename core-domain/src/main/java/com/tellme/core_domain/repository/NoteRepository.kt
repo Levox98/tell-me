@@ -6,7 +6,7 @@ import kotlinx.coroutines.flow.Flow
 
 interface NoteRepository {
 
-    fun saveNoteToLocal(note: Note)
+    suspend fun saveNoteToLocal(note: Note)
     fun editNote(noteId: Int) // ?
     fun deleteNote(noteId: Int) // ?
 

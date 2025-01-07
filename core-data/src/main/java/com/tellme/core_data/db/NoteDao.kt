@@ -10,7 +10,7 @@ import kotlinx.coroutines.flow.Flow
 interface NoteDao {
 
     @Insert
-    fun addNote(noteEntity: NoteDataEntity)
+    suspend fun addNote(noteEntity: NoteDataEntity)
 
     @Query("SELECT * FROM user_notes WHERE id = :noteId")
     suspend fun getNoteById(noteId: Int): NoteDataEntity
