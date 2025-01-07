@@ -31,7 +31,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -62,6 +61,8 @@ fun NewNoteScreenRoot(
         is NewNoteScreenViewState.Content -> {
             val state = vmState.value as NewNoteScreenViewState.Content
             NewNoteScreenContent(
+                noteTitle = state.title,
+                noteText = state.text,
                 topDateString = "${resources.getDayOfMonth(state.date)} ${
                     resources.getMonthOfYear(
                         state.date
@@ -79,6 +80,8 @@ fun NewNoteScreenRoot(
 
 @Composable
 private fun NewNoteScreenContent(
+    noteTitle: String,
+    noteText: String,
     topDateString: String,
     bottomDateString: String,
     submitIntent: (NewNoteScreenIntent) -> Unit
@@ -130,14 +133,14 @@ private fun NewNoteScreenContent(
                 Spacer(modifier = Modifier.height(16.dp))
 
                 OutlinedTextField(
-                    value = TextFieldValue(""),
-                    onValueChange = {
-
+                    value = noteTitle,
+                    onValueChange = { textValue ->
+                        submitIntent(NewNoteScreenIntent.SetTitle(textValue))
                     },
                     modifier = Modifier
                         .fillMaxWidth(),
                     placeholder = {
-                        Text("title")
+                        if (noteTitle.isEmpty()) Text("title", color = Color.LightGray)
                     },
                     shape = RoundedCornerShape(24.dp),
                     colors = OutlinedTextFieldDefaults.colors(
@@ -149,16 +152,16 @@ private fun NewNoteScreenContent(
                 Spacer(modifier = Modifier.height(16.dp))
 
                 OutlinedTextField(
-                    value = TextFieldValue(""),
-                    onValueChange = {
-
+                    value = noteText,
+                    onValueChange = { textValue ->
+                        submitIntent(NewNoteScreenIntent.SetText(textValue))
                     },
                     modifier = Modifier
                         .fillMaxWidth(),
                     minLines = 10,
                     maxLines = 10,
                     placeholder = {
-                        Text("content")
+                        if (noteText.isEmpty()) Text("content", color = Color.LightGray)
                     },
                     shape = RoundedCornerShape(24.dp),
                     colors = OutlinedTextFieldDefaults.colors(
@@ -172,7 +175,9 @@ private fun NewNoteScreenContent(
                     .weight(1f))
 
                 Button(
-                    onClick = {},
+                    onClick = {
+                        submitIntent(NewNoteScreenIntent.SaveNote)
+                    },
                     modifier = Modifier
                         .fillMaxWidth()
                         .imePadding()

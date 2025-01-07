@@ -15,7 +15,7 @@ sealed class MainScreenViewState {
     data object Default : MainScreenViewState()
     data object Loading : MainScreenViewState()
     data class Content(
-        val notes: List<Note>
+        val notes: List<Note> = emptyList()
     ) : MainScreenViewState()
 }
 
@@ -36,6 +36,16 @@ class MainScreenViewModel @Inject constructor(
 
     init {
         observeIntent()
+        viewModelScope.launch {
+            getNotesByMonthUseCase(0 /*TODO*/).collect { notes ->
+                val initValue: MainScreenViewState.Content = if (state.value is MainScreenViewState.Content)
+                    state.value as MainScreenViewState.Content
+                else
+                    MainScreenViewState.Content()
+
+                updateState(initValue.copy(notes = notes))
+            }
+        }
     }
 
     private fun observeIntent() {
