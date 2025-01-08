@@ -45,14 +45,20 @@ import java.util.Date
 
 @Composable
 fun NewNoteScreen(
-    vm: NewNoteScreenViewModel
+    vm: NewNoteScreenViewModel,
+    onNavigateBack: () -> Unit
 ) {
-    NewNoteScreenRoot(vmState = vm.state.collectAsState(), submitIntent = vm::setIntent)
+    NewNoteScreenRoot(
+        vmState = vm.state.collectAsState(),
+        onNavigateBack = onNavigateBack,
+        submitIntent = vm::setIntent
+    )
 }
 
 @Composable
 fun NewNoteScreenRoot(
     vmState: State<NewNoteScreenViewState>,
+    onNavigateBack: () -> Unit,
     submitIntent: (NewNoteScreenIntent) -> Unit
 ) {
     val resources = LocalContext.current.resources
@@ -69,6 +75,7 @@ fun NewNoteScreenRoot(
                     )
                 }",
                 bottomDateString = resources.getDayOfWeek(state.date),
+                onNavigateBack = onNavigateBack,
                 submitIntent = submitIntent
             )
         }
@@ -84,6 +91,7 @@ private fun NewNoteScreenContent(
     noteText: String,
     topDateString: String,
     bottomDateString: String,
+    onNavigateBack: () -> Unit,
     submitIntent: (NewNoteScreenIntent) -> Unit
 ) {
 
@@ -170,13 +178,16 @@ private fun NewNoteScreenContent(
                     )
                 )
 
-                Spacer(modifier = Modifier
-                    .height(48.dp)
-                    .weight(1f))
+                Spacer(
+                    modifier = Modifier
+                        .height(48.dp)
+                        .weight(1f)
+                )
 
                 Button(
                     onClick = {
                         submitIntent(NewNoteScreenIntent.SaveNote)
+                        onNavigateBack()
                     },
                     modifier = Modifier
                         .fillMaxWidth()
@@ -204,6 +215,6 @@ fun NewNoteScreenPreview() {
             )
         }
 
-        NewNoteScreenRoot(state) {}
+        NewNoteScreenRoot(state, {}) {}
     }
 }

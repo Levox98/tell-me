@@ -34,13 +34,11 @@ class MainActivity : ComponentActivity() {
                     startDestination = NavDestination.MainRoot
                 ) {
                     composable<NavDestination.MainRoot> {
-                        MainRootScreen {
-                            navController.navigate(NavDestination.NewNoteScreen)
-                        }
+                        MainRootScreen { navController.navigate(NavDestination.NewNoteScreen) }
                     }
 
                     composable<NavDestination.NewNoteScreen> {
-                        NewNoteScreen(vm = hiltViewModel())
+                        NewNoteScreen(vm = hiltViewModel()) { navController.popBackStack() }
                     }
                 }
             }
