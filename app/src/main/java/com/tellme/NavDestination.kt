@@ -20,4 +20,13 @@ sealed class NavDestination {
 
     @Serializable
     data class NotesForDayScreen(val day: Int) : NavDestination()
+
+    @Serializable
+    data object ChartsScreen : NavDestination()
+
+    @Serializable
+    data object UserScreen : NavDestination()
+
+    @Serializable
+    data object SettingsScreen : NavDestination()
 }

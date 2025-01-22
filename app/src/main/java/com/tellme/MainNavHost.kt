@@ -13,11 +13,22 @@ fun MainNavHost(navController: NavHostController, modifier: Modifier) {
 
     NavHost(
         navController = navController,
-        startDestination = NavDestination.MainScreen,
+        startDestination = NavDestination.MainRoot,
         modifier = modifier
     ) {
+        composable<NavDestination.MainRoot> {}
+
         composable<NavDestination.MainScreen> {
             MainScreen(vm = hiltViewModel(), onNavigateToDayNotes = {})
+        }
+        composable<NavDestination.ChartsScreen> {
+
+        }
+        composable<NavDestination.UserScreen> {
+
+        }
+        composable<NavDestination.SettingsScreen> {
+
         }
     }
 }
